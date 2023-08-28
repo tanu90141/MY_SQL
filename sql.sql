@@ -83,6 +83,49 @@ select * from actor where actor_id in(1,5,10,56,45,36);
 select * from actor where actor_id!=5;
 select * from actor where not(actor_id=5);
 -- ---------------------------------------perform the given statements---------------------------------------------------------
+use sakila;
+select * from actor;
+select * from actor where actor_id between 2 and 7 and (first_name="nick" or first_name="ed");-- 1
+select * from actor where  not(last_name like "%a%e%");-- 2
+select * from actor where not(first_name="grace"or first_name="joy"or first_name="mathew") and actor_id<15;-- 3
+select * from actor where  not(last_name like "%a%"  and first_name like "%i%") and actor_id between 10 and 20;-- 4
+-- -------------------------------------------------28aug------------------------------------------------------------------
+use sakila;
+select * from city where (city_id=3 or city_id=4) and country_id=60;
+select * from film_list;
+select fid,title from film_list where fid<7 and  not(fid=4 or fid=6);
+-- -----------------------------------------if we use like then we don't use % in start of query-----------------
+-- -------------------------------------------------------------------sorting-------------------------------------
+-- -------------------------------------------we use orderby to sort the data in asscending or decending order---------------
+select * from film_list order by category desc;
+desc film_list;
+select * from film_list order by 4;-- -----------sort directly by column number of table-------------------
+select fid,title, category from film_list order by 2 ;-- sort as per given colummns in query---------------
+select * from address order by district;
+select district, address_id,address from address order by district ,address_id desc;
+select district, address_id,address from address order by district desc,address_id desc;
+select * from address;
+-- limit for records limit the record as you want----------------------------------------
+select * from address limit 3 ;
+-- offset- is used to skip the record from start-------------------------------------------------------
+select * from address limit 3,2 ;-- with offset keyword use--------------------
+select * from address limit 5 offset 3;-- with offset keyword----------------------
+-- dual table is the dummy table in which we can check our logic and things but in exact they are empty tables but exist in database with dummy one row and column-----------------
+select 2+2 from dual;
+-- we cannot use any function on this table as it is empty------------------------
+select now() from dual;-- now()is a function that fetch date and time  from our system-------------
+-- concat ->combinig two columns
+-- concat_ws->combine more than 2 columns ----------------------------------
+-- substring-> 
+
+
+
+
+
+
+
+
+
 
 
 
