@@ -143,6 +143,7 @@ use sakila;
 desc customer;
 select count(*) from language; -- count number of records in  table
 
+select substr('hello motuu',-3);
 
 
 -- -----------------------------------------------------------------Data Manipulation Laanguage---------------------------------------------------------
@@ -153,11 +154,60 @@ select count(*) from language; -- count number of records in  table
 insert into language values(6 ,"portuguese",now());
 desc language;
 select * from language;
+-- ----------------------------------------------5sep--------------------------------------------------------------
+use sakila;
+desc language;
+select * from language;
+insert into language  values(8,"india",now()); -- now()directly fetch the date and time from the system;
+select * from language;
+insert into language  values(9,"indonesia",'2020-09-26 10:35:00');
+select * from language;
+insert into language  values(9,"indonesia",'2020-09-26 10:35:00'); -- duplicate error 
+insert  ignore into language  values(9,"indonesia",'2020-09-26 10:35:00'); -- warning occur and does not effect the table
+insert  ignore into language  values(9,"indonesia",'2020-09-26 10:35:00',0); -- warning occur that one column is extra
+-- ---------------------------------------------------------------2nd method for data inertion--------------------------------------
+insert into language (language_id,last_update,name) values (11,now(),'russia');
+select * from language;
+desc language;
+insert into language (name) values ('loseangles');
+select * from language;
+-- multiple value insertion---------------------------------
+insert into language (language_id,last_update,name) values (13,now(),'r'), (14,now(),'u'), (15,now(),'s');
+select * from language;
+-- ----------------------------------------set--------------------
+insert into language set name='e';
+select * from language;
 
 
-
-
-
+--        --------------------------------------------now we prepare our own database-----------------------------------
+ create database  test;
+  create database if not exists test;
+use test;
+show tables;
+-- -------------------------ddl statement create(table,index,view)-------------------------------------------
+create table employee(e_id int,e_name char(20),e_mail char(20));
+desc employee;
+insert into employee values(1,'jay','jay@gmail.com');
+insert into employee values(1,'aman','aman@gmail.com');
+select * from employee;
+insert into employee values(1,'aman',null);
+insert into employee(e_id) values(1);
+select * from employee;
+create table employee2(e_id int default 0,e_name char(20),e_mail char(20));
+insert into employee2 (e_name,e_mail)
+values('aman','aman@gmail.com');
+select * from employee2;
+insert into employee2 (e_name,e_mail)
+values('a','a@gmail.com');
+select * from employee2;
+create  table student(s_id int not null auto_increment,s_name char(20) not null,s_fee int not null, primary key(s_id));
+desc student;
+insert into student values (1,'tanu',77000);
+select * from student;
+insert into student(s_name,s_fee) values ('jay',77000);
+select * from student;
+insert into student(s_name,s_fee) values ('ram',77000);
+select * from student; 
 
 
 
