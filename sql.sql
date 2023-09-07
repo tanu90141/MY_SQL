@@ -254,23 +254,14 @@ insert into ram values(33);
 select * from ram;
 drop table ram1;
 create table ram1(eid int(5) zerofill); -- left side fill----------------------
-insert into ram1 values(3);
+insert into ram1 values(1);
 select * from ram1;
 insert into ram1 values(33);
 select * from ram1;
 create table ram2(eid int unsigned); -- in unsigned it doenot take -ve value-----------
 insert into ram2 values(-33);
 select * from ram2;
--- big int-------------
-
-
-
-
-
-
-
-
-
+-- big int-------------takes 18 crore something value in unsigned form-------------------
 -- boolean is stored as tiny int ---------------------------------------------
 create table s_bool(i bool);
 insert into s_bool values(true),(false);
@@ -278,5 +269,42 @@ select * from s_bool;
 insert into s_bool values(0),(1),(127);
 select * from s_bool;
 
+-- -------------------------------------------7sep-----------------------------------------
 
+-- varchar and char
+use test;
+create table ep1(name1 char(20));-- char take less than equal to 20 characters
+insert into ep1 values("whgedgwg");
+insert into ep1 values("a ");
+select name1,length(name1) from ep1;
+create table ep_var(name1 varchar(20));
+insert into ep_var values("a    ");
+select name1,length(name1) from ep_var;-- varchar count space also
+create table ep_var1(eid int check(eid>2));
+insert into ep_var1 values(2);-- violate the condition of check given in previous line
+create table ep_var2(gender char(1) ,check(gender in ('m','f','o')));
+insert into ep_var2 values('f');
+create table ep_var4(age int ,gender char(1) ,check(age>10 and gender in ('m','f','o')));
+insert into ep_var4 values(13,'m');
+select * from ep_var4;
 
+delete from ep_var4 where age=3;-- delete ------------
+select * from ep_var4;
+update ep_var4 set age=23 where age=13;-- set---------
+select * from ep_var4;
+update ep_var4 set age=17 limit 3;
+select * from ep_var4;
+delete from ep_var4 order by age limit 2;-- delete deletes the data row by row thats why its slow but it can be roll back--
+select * from ep_var4;
+-- drop----------
+drop table ep_var4;-- delete whole table with data but it can be rollback
+select * from ep_var4;
+create table ep_var4(age int ,gender char(1) ,check(age>10 and gender in ('m','f','o')));
+insert into ep_var4 values(15,'f');
+select * from ep_var4;
+truncate table ep_var4;-- truncate firstly drop the existing table then create the new schema of that table but it cannot be rollback
+select * from ep_var4;
+
+-- homework
+-- ------groupby------how filter data in groupby
+-- ---------distinct-----------
