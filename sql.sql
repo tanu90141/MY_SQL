@@ -308,3 +308,58 @@ select * from ep_var4;
 -- homework
 -- ------groupby------how filter data in groupby
 -- ---------distinct-----------
+-- ------------------------------------------------------8sep-----------------------------------------------------------------------------------------
+use sakila;
+select first_name,concat ("mr",first_name) fullname from actor ;
+select first_name,concat ("mr",first_name) fullname from actor order by fullname;
+-- group by---------------------------
+select first_name,length(first_name) from actor;-- single row function----
+-- for multiple row we use multi row function-----------
+-- we collect similar kind of values  known as group then perform function known as group operation
+-- i.e group by operation----------
+show tables;
+use world;
+show tables;
+select * from country;
+-- count-------
+desc country;
+create table t1(id int,city varchar(20));
+insert into t1 values(1,"hey1");
+insert into t1 values(1,"hey4");
+insert into t1 values(null,"hey3");
+select * from t1;
+select count(*)from t1;
+-- count() count the column that doesnot contain nulll values-------
+select count(id)from t1;-- it works on primary key as primary key is not null---
+
+-- sum()---------
+select sum(id) from t1;
+-- distinct()------
+select count(distinct id) from t1;
+select * from city where countrycode="afg";
+select countrycode  from city group by countrycode;
+-- 
+select * from city;
+select concat("country",countrycode,"has total count",count(*),"and sum is",sum(population)) from city group by countrycode;  
+desc city;
+select * from city;
+show tables;
+select * from city;
+-- group by-----followed by --------having---------------
+select countrycode,count(id),sum(population) as totalpopulation from city group by countrycode having sum(population)>500 ;
+select * from country;
+select continent from country;
+select continent from country group by continent;
+select * from country;
+
+
+
+
+
+
+
+
+
+
+
+
