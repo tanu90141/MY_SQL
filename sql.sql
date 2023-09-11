@@ -351,10 +351,61 @@ select * from country;
 select continent from country;
 select continent from country group by continent;
 select * from country;
+show databases;
+use sakila;
+show databases;
+use world;
+-- -------------------------------------------11sep------------------------------
+--  set operations------- UNION,INTERSECT,EXCEPT--------------
+show tables;
+select * from country;
+use sakila;
+show tables;
+desc actor;
+desc actor_info;
+select first_name from actor_info order by first_name limit 3;-- order by
+select first_name from actor limit 3;-- without order by
 
 
+-- union------------
 
 
+-- ----------------------
+select first_name from actor 
+union
+select first_name from actor_info;
+create table xyz(id int );
+insert into xyz values(10);
+insert into xyz values(10);
+create table abc(id int );
+insert into abc values(20);
+select *from xyz union all select * from abc;-- union all combine all duplicate asa well as all values
+-- where as union doesnot give duplicate values
+insert into xyz values(10);
+insert into xyz values(20);
+create table abc(id int );
+insert into abc values(20);
+select *from xyz 
+intersect -- give common data from  table
+ select * from abc; 
+-- except--------------
+insert into xyz values(10);
+insert into xyz values(20);
+create table abc(id int );
+insert into abc values(20);
+select *from xyz 
+except -- gives data that is not in second table
+ select * from abc;
+insert into xyz values(now());
+
+-- ------------------JOINS-----------------------------------------
+-- INNER JOIN ---------------- common elements
+-- LEFT JOIN--------------all left table+common element
+-- RIGHT JOIN---------------all right table+commom element
+-- FULL OUTER-----------------all data from both tables
+
+-- HOMEWORK----------------difference between join and set operations--------
+-- --------------------------group by operations---------------------
 
 
 
